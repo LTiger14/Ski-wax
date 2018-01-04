@@ -1,9 +1,3 @@
-export interface Location {
-  name?: string,
-  longitude: number,
-  latitude: number
-}
-
 export interface Kv {
   key: string,
   value: string

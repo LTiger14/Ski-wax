@@ -15,6 +15,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { WeatherImagePipe } from '../pipes/image.pipe';
 import { UtilsService } from '../services/utils.service';
+import { DataStore } from '../services/data-store';
 import { WeatherService } from '../services/weather/weather.service';
 
 @NgModule({
@@ -37,10 +38,11 @@ import { WeatherService } from '../services/weather/weather.service';
     ListPage
   ],
   providers: [
+    DataStore,
     Geolocation,
-    StatusBar,
     SplashScreen,
     UtilsService,
+    StatusBar,
     WeatherService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
