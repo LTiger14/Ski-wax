@@ -36,6 +36,11 @@ export class HomePage {
           console.log(res)
           loading.dismiss();
         });
+    })
+    .catch(error => {
+      // TODO : handle error
+      console.error('An error occured' + error);
+      loading.dismiss();
     });
   }
 
