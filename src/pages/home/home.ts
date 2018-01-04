@@ -6,6 +6,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { DataStore } from '../../services/data-store';
 import { WeatherService } from '../../services/weather/weather.service';
 import { CONFIG } from '../../services/constant';
+import { HomeLocation } from '../../services/model';
 
 @Component({
   selector: 'page-home',
@@ -31,7 +32,7 @@ export class HomePage {
     this.initializePosition().then(resp => {
       let lat = resp.coords.latitude;
       let lon = resp.coords.longitude;
-      this.dataStore.setData(CONFIG.HOME_LOCATION, {lat, lon});
+      this.dataStore.setData(CONFIG.HOME_LOCATION, {lat, lon} as HomeLocation);
       this.weatherService.getCurrentWeather(lon, lat)
         .subscribe(res => {
           console.log(res);

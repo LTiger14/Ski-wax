@@ -1,3 +1,9 @@
+export interface HomeLocation {
+  name?: string,
+  lat: number,
+  lon: number,
+}
+
 export interface Kv {
   key: string,
   value: string
