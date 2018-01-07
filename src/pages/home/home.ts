@@ -32,10 +32,13 @@ export class HomePage {
     this.initializePosition().then(resp => {
       let lat = resp.coords.latitude;
       let lon = resp.coords.longitude;
-      this.dataStore.setData(CONFIG.HOME_LOCATION, {lat, lon} as HomeLocation);
+      // TODO: Put in separate place
+      // this.dataStore.setData(CONFIG.HOME_LOCATION, {lat, lon} as HomeLocation);
       this.weatherService.getCurrentWeather(lon, lat)
         .subscribe(res => {
           console.log(res);
+          this.dataStore.setData(CONFIG.WEATHER_DATA, res);
+          this.dataStore.setData(CONFIG.WEATHER_UPDATE, new Date());
           loading.dismiss();
         });
     })

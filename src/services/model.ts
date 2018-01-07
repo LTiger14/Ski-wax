@@ -20,6 +20,7 @@ export interface Forecast {
   daily?: {
     data: Array<DataPoint>
   };
+  timestamp: Date,
 }
 
 export interface DataPoint {
