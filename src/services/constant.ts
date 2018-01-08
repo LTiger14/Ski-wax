@@ -1,7 +1,7 @@
 // Keys for storage
 export const CONFIG = {
-	WEATHER_UPDATE: 'weatherUpdate',
 	WEATHER_DATA: 'weatherData',
+	WEATHER_UPDATE_AND_CITY: 'weatherUpdateCity',
 	HOME_LOCATION: 'homeLocation',
 };
 

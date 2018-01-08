@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { JsonpModule } from '@angular/http';
 import { ErrorHandler, NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
@@ -17,6 +18,7 @@ import { WeatherImagePipe } from '../pipes/image.pipe';
 import { UtilsService } from '../services/utils.service';
 import { DataStore } from '../services/data-store';
 import { WeatherService } from '../services/weather/weather.service';
+import { LocationService } from '../services/location.service';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { WeatherService } from '../services/weather/weather.service';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     JsonpModule,
     IonicStorageModule.forRoot(),
     IonicModule.forRoot(MyApp),
@@ -40,6 +43,7 @@ import { WeatherService } from '../services/weather/weather.service';
   providers: [
     DataStore,
     Geolocation,
+    LocationService,
     SplashScreen,
     UtilsService,
     StatusBar,

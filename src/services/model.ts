@@ -4,6 +4,11 @@ export interface HomeLocation {
   lon: number,
 }
 
+export interface DateCity {
+  city: string,
+  date: Date,
+}
+
 export interface Kv {
   key: string,
   value: string

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Coordinates } from '@ionic-native/geolocation';
 import { differenceInHours } from 'date-fns';
 
 import { VALID_WEATHER_DURATION } from './constant';
@@ -12,7 +11,7 @@ export class UtilsService {
     }
 
     // TODO once google api is integrated
-    isLocationValid(currentCoords: Coordinates, savedCoords: Coordinates): boolean {
-        return false;
+    isLocationValid(currentCity: string, savedCity: string): boolean {
+        return currentCity === savedCity? true: false;
     }
 }
