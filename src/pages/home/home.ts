@@ -7,7 +7,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { DataStore } from '../../services/data-store';
 import { WeatherService } from '../../services/weather/weather.service';
 import { CONFIG } from '../../services/constant';
-import { HomeLocation, DateCity } from '../../services/model';
+import { DateCity } from '../../services/model';
 import { LocationService } from '../../services/location.service';
 import { UtilsService } from '../../services/utils.service';
 
