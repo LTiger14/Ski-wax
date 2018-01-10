@@ -14,4 +14,12 @@ export class UtilsService {
     isLocationValid(currentCity: string, savedCity: string): boolean {
         return currentCity === savedCity? true: false;
     }
+
+    getWeatherIcon(icon: string): string {
+        if (icon) {
+          return 'assets/imgs/' + icon + '.png';
+        } else {
+          return 'assets/imgs/default.png';
+        }
+    }
 }

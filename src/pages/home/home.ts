@@ -7,7 +7,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { DataStore } from '../../services/data-store';
 import { WeatherService } from '../../services/weather/weather.service';
 import { CONFIG } from '../../services/constant';
-import { DateCity } from '../../services/model';
+import { DateCity, Forecast } from '../../services/model';
 import { LocationService } from '../../services/location.service';
 import { UtilsService } from '../../services/utils.service';
 
@@ -16,6 +16,10 @@ import { UtilsService } from '../../services/utils.service';
   templateUrl: 'home.html'
 })
 export class HomePage {
+
+  city: string;
+  forecast: Forecast;
+  weatherImage: string;
 
   constructor(public navCtrl: NavController,
     public geolocation: Geolocation,
@@ -40,11 +44,12 @@ export class HomePage {
 
       this.locationService.getLocationName(lon, lat)
         .subscribe(res => {
-          this.locationService.city = res.results[0].formatted_address.split(',')[1];
+          this.city = this.locationService.city = res.results[0].formatted_address.split(',')[1];
           this.dataStore.getData(CONFIG.WEATHER_UPDATE_AND_CITY).then(data => {
             if (data.city !== null && data.city !== undefined) {
               if(this.utilService.isLocationValid(this.locationService.city, data.city)
                 && this.utilService.isWeatherDataValid(data.date)) {
+                  this.loadWeather(lon, lat, loading);
                   loading.dismiss();
               }
               else this.fetchWeather(lon, lat, loading);
@@ -60,10 +65,20 @@ export class HomePage {
     });
   }
 
+  private loadWeather(lon: number, lat: number, loading: Loading): void {
+    this.dataStore.getData(CONFIG.WEATHER_DATA).then(data => {
+      this.forecast = data as Forecast;
+      this.weatherImage = this.utilService.getWeatherIcon(this.forecast.currently.icon);      
+      console.log(this.forecast);
+    }).catch(error => this.fetchWeather(lon, lat, loading));
+  }
+
   private fetchWeather(lon: number, lat: number, loading: Loading): void {
     this.weatherService.getCurrentWeather(lon, lat)
     .subscribe(res => {
-      console.log(res);
+      this.forecast = res as Forecast;
+      this.weatherImage = this.utilService.getWeatherIcon(this.forecast.currently.icon);      
+      console.log(this.forecast);
       this.dataStore.setData(CONFIG.WEATHER_DATA, res);
       this.dataStore.setData(CONFIG.WEATHER_UPDATE_AND_CITY,
         { 'city': this.locationService.city, 'date': new Date()} as DateCity);

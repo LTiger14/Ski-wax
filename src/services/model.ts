@@ -19,6 +19,7 @@ export interface Forecast {
   longitude: number;
   //IANA timezone
   timezone: string;
+  currently?: DataPoint;
   hourly?: {
     data: Array<DataPoint>
   };
