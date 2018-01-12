@@ -1,4 +1,25 @@
-.weather-icon {
-    height: 80px;
-    width: 80px;
+.weather-card {
+    $image-size: 80px;
+    display: flex;
+    justify-content: space-around;
+    background-color: rgba($color: lightblue, $alpha: .1);
+
+    .temperature {
+        height: $image-size;
+        line-height: $image-size;
+
+        .temp-num {
+            font-size: 2em;
+        }
+    }
+
+    .wind {
+        height: $image-size;
+        line-height: $image-size;
+    }
+
+    .weather-icon {
+        height: $image-size;
+        width: $image-size;
+    }
 }

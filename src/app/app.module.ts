@@ -15,6 +15,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { WeatherImagePipe } from '../pipes/image.pipe';
+import { RoundPipe } from '../pipes/round.pipe';
 import { UtilsService } from '../services/utils.service';
 import { DataStore } from '../services/data-store';
 import { WeatherService } from '../services/weather/weather.service';
@@ -25,6 +26,7 @@ import { LocationService } from '../services/location.service';
     MyApp,
     HomePage,
     ListPage,
+    RoundPipe,
     WeatherImagePipe
   ],
   imports: [

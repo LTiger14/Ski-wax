@@ -3,14 +3,23 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title class="header-city">{{city}}</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h3>{{city}}</h3>
-  <div *ngIf="forecast">{{forecast.currently.temperature}}</div>
-  <ion-img class="weather-icon" src="{{weatherImage}}"></ion-img>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="weather-card">
+          <div class="temperature" *ngIf="forecast">
+            <span class="temp-num">{{forecast.currently.temperature | round}}</span>
+            <span class="temp-unit">C</span>            
+          </div>
+          <ion-img class="weather-icon" src="{{weatherImage}}"></ion-img>
+          <div class="wind">Wind</div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   <p>
     If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
   </p>
