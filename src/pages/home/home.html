@@ -19,6 +19,12 @@
           <div class="wind">Wind</div>
       </ion-col>
     </ion-row>
+    <ion-row class="future-forecast">
+      <ion-col class="future-item" *ngFor="let item of futureItems">
+        <ion-img src="{{utilService.getWeatherIcon(item.icon)}}"></ion-img>
+        <div>{{item.temperature | round}}</div>
+      </ion-col>
+    </ion-row>
   </ion-grid>
   <p>
     If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.

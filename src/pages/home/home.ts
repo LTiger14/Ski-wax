@@ -7,7 +7,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { DataStore } from '../../services/data-store';
 import { WeatherService } from '../../services/weather/weather.service';
 import { CONFIG } from '../../services/constant';
-import { DateCity, Forecast } from '../../services/model';
+import { DateCity, Forecast, DataPoint } from '../../services/model';
 import { LocationService } from '../../services/location.service';
 import { UtilsService } from '../../services/utils.service';
 
@@ -19,6 +19,7 @@ export class HomePage {
 
   city: string;
   forecast: Forecast;
+  futureItems: DataPoint[];
   weatherImage: string;
 
   constructor(public navCtrl: NavController,
@@ -67,7 +68,7 @@ export class HomePage {
 
   private loadWeather(lon: number, lat: number, loading: Loading): void {
     this.dataStore.getData(CONFIG.WEATHER_DATA).then(data => {
-      this.forecast = data as Forecast;
+      this.setForecast(data as Forecast);
       this.weatherImage = this.utilService.getWeatherIcon(this.forecast.currently.icon);      
       console.log(this.forecast);
     }).catch(error => this.fetchWeather(lon, lat, loading));
@@ -76,7 +77,7 @@ export class HomePage {
   private fetchWeather(lon: number, lat: number, loading: Loading): void {
     this.weatherService.getCurrentWeather(lon, lat)
     .subscribe(res => {
-      this.forecast = res as Forecast;
+      this.setForecast(res as Forecast);
       this.weatherImage = this.utilService.getWeatherIcon(this.forecast.currently.icon);      
       console.log(this.forecast);
       this.dataStore.setData(CONFIG.WEATHER_DATA, res);
@@ -84,6 +85,11 @@ export class HomePage {
         { 'city': this.locationService.city, 'date': new Date()} as DateCity);
       loading.dismiss();
     });
+  }
+
+  public setForecast(value: Forecast): void {
+    this.forecast = value;
+    this.futureItems = value.hourly.data.slice(1,6);
   }
 
   private initializePosition(): Promise<any> {

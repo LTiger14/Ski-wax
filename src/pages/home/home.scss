@@ -23,3 +23,16 @@
         width: $image-size;
     }
 }
+
+.future-forecast {
+    display: flex;
+
+    .future-item {
+        text-align: center;
+        border-right: 1px gray solid;
+
+        &:first-of-type {
+            border-left: 1px gray solid;
+        }
+    }
+}
