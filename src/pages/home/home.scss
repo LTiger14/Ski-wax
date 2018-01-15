@@ -34,5 +34,28 @@
         &:first-of-type {
             border-left: 1px gray solid;
         }
+
+        .future-icon {
+            height: 25x;
+            width: 25px;
+        }
+    }
+}
+
+.snow-container {
+    padding-top: 1em;
+}
+
+.recommendation-container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 1em;
+
+    .wax-image {
+        max-height: 240px;
+        max-width: 120px;
+        width: auto;
+        height: auto;
+        margin: auto;
     }
 }

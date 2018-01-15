@@ -21,14 +21,23 @@
     </ion-row>
     <ion-row class="future-forecast">
       <ion-col class="future-item" *ngFor="let item of futureItems">
-        <ion-img src="{{utilService.getWeatherIcon(item.icon)}}"></ion-img>
+        <img class="future-icon" src="{{utilService.getWeatherIcon(item.icon)}}">
         <div>{{item.temperature | round}}</div>
       </ion-col>
     </ion-row>
+    <ion-row class="snow-container">
+      <ion-item>
+        <ion-label>Snow Condition</ion-label>
+        <ion-select>
+          <ion-option>Fresh snow</ion-option>
+          <ion-option>Old snow</ion-option>
+          <ion-option>Frosen</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-row>
+    <ion-row class="recommendation-container">
+      <p>Recommended wax: </p>
+      <ion-img class="wax-image" src="assets/wax/swix_polar.jpg"></ion-img>
+    </ion-row>
   </ion-grid>
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
-
-  <button ion-button secondary menuToggle>Toggle Menu</button>
 </ion-content>
