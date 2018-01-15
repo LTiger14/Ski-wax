@@ -27,11 +27,11 @@
     </ion-row>
     <ion-row class="snow-container">
       <ion-item>
-        <ion-label>Snow Condition</ion-label>
-        <ion-select>
-          <ion-option>Fresh snow</ion-option>
-          <ion-option>Old snow</ion-option>
-          <ion-option>Frosen</ion-option>
+        <ion-label>Snow Conditions</ion-label>
+        <ion-select [(ngModel)]="snowType">
+          <ion-option value="FRESH_SNOW">Fresh snow</ion-option>
+          <ion-option value="OLD_SNOW">Old snow</ion-option>
+          <ion-option value="MANMADE">Manmade</ion-option>
         </ion-select>
       </ion-item>
     </ion-row>

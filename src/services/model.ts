@@ -92,3 +92,9 @@ export enum MetricDistance {
 export enum MetricPressure {
   MBAR, HPA
 }
+
+export enum SnowType {
+  FRESH_SNOW = 'FRESH_SNOW', 
+  OLD_SNOW = 'OLD_SNOW', 
+  MANMADE = 'MANMADE'
+}

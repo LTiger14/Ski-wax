@@ -7,7 +7,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { DataStore } from '../../services/data-store';
 import { WeatherService } from '../../services/weather/weather.service';
 import { CONFIG } from '../../services/constant';
-import { DateCity, Forecast, DataPoint } from '../../services/model';
+import { DateCity, Forecast, DataPoint, SnowType } from '../../services/model';
 import { LocationService } from '../../services/location.service';
 import { UtilsService } from '../../services/utils.service';
 
@@ -20,6 +20,7 @@ export class HomePage {
   city: string;
   forecast: Forecast;
   futureItems: DataPoint[];
+  snowType: SnowType = SnowType.FRESH_SNOW;
   weatherImage: string;
 
   constructor(public navCtrl: NavController,
