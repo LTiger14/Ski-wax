@@ -77,6 +77,22 @@ export interface Metrics {
   pressure: MetricPressure;
 }
 
+export interface Wax {
+  name: string;
+  ref?: string;
+  uri: string;
+  newSnow: { min: number, max: number };
+  oldSnow: { min: number, max: number };
+}
+
+export interface WaxSelector {
+  findWax(temp: number, snowType: SnowType, activityLevel?: ActivityLevel): Array<Wax>;
+}
+
+export enum ActivityLevel {
+  ACTIVE, SPORT, RACING
+}
+
 export enum MetricTemp {
   F, C
 }
@@ -94,5 +110,5 @@ export enum MetricPressure {
 }
 
 export enum SnowType {
-  FRESH_SNOW, OLD_SNOW, MANMADE
+  NEW_SNOW, OLD_SNOW, MANMADE
 }

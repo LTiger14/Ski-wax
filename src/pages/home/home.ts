@@ -24,7 +24,7 @@ export class HomePage {
   lat: number;
   lon: number;
   // TODO update model
-  snowType: SnowType = SnowType.FRESH_SNOW;
+  snowType: SnowType = SnowType.NEW_SNOW;
   weatherImage: string;
 
   constructor(public navCtrl: NavController,

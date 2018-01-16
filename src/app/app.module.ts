@@ -21,6 +21,7 @@ import { UtilsService } from '../services/utils.service';
 import { DataStore } from '../services/data-store';
 import { WeatherService } from '../services/weather/weather.service';
 import { LocationService } from '../services/location.service';
+import { WaxSelectionService } from '../services/wax-selection.service';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { LocationService } from '../services/location.service';
     SplashScreen,
     UtilsService,
     StatusBar,
+    WaxSelectionService,
     WeatherService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
