@@ -1,4 +1,4 @@
-import { Wax, WaxSelector, MetricTemp, SnowType, ActivityLevel } from '../../model';
+import { Wax, WaxSelector, SnowType, ActivityLevel } from '../../model';
 
 export class Swix implements WaxSelector {
 	waxes: Array<Wax> = [
