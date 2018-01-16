@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { ModalController, NavController } from 'ionic-angular';
 import { Loading } from 'ionic-angular/components/loading/loading';
 import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
 import { Geolocation } from '@ionic-native/geolocation';
@@ -7,9 +7,10 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { DataStore } from '../../services/data-store';
 import { WeatherService } from '../../services/weather/weather.service';
 import { CONFIG } from '../../services/constant';
-import { DateCity, Forecast, DataPoint, SnowType } from '../../services/model';
+import { DateCity, Forecast, DataPoint, SnowType, HomeLocation } from '../../services/model';
 import { LocationService } from '../../services/location.service';
 import { UtilsService } from '../../services/utils.service';
+import { LocationPage } from '../location/location';
 
 @Component({
   selector: 'page-home',
@@ -20,6 +21,8 @@ export class HomePage {
   city: string;
   forecast: Forecast;
   futureItems: DataPoint[];
+  lat: number;
+  lon: number;
   // TODO update model
   snowType: SnowType = SnowType.FRESH_SNOW;
   weatherImage: string;
@@ -27,6 +30,7 @@ export class HomePage {
   constructor(public navCtrl: NavController,
     public geolocation: Geolocation,
     public loadingCtrl: LoadingController,
+    public modalController: ModalController,
     public utilService: UtilsService,
     private dataStore: DataStore,
     private locationService: LocationService,
@@ -42,23 +46,23 @@ export class HomePage {
     
     loading.present();
     this.initializePosition().then(resp => {
-      let lat = resp.coords.latitude;
-      let lon = resp.coords.longitude;
+      this.lat = resp.coords.latitude;
+      this.lon = resp.coords.longitude;
 
-      this.locationService.getLocationName(lon, lat)
+      this.locationService.getLocationName(this.lon, this.lat)
         .subscribe(res => {
           this.city = this.locationService.city = res.results[0].formatted_address.split(',')[1];
           this.dataStore.getData(CONFIG.WEATHER_UPDATE_AND_CITY).then(data => {
             if (data.city !== null && data.city !== undefined) {
               if(this.utilService.isLocationValid(this.locationService.city, data.city)
                 && this.utilService.isWeatherDataValid(data.date)) {
-                  this.loadWeather(lon, lat, loading);
+                  this.loadWeather(this.lon, this.lat, loading);
                   loading.dismiss();
               }
-              else this.fetchWeather(lon, lat, loading);
-            } else this.fetchWeather(lon, lat, loading);
+              else this.fetchWeather(this.lon, this.lat, loading);
+            } else this.fetchWeather(this.lon, this.lat, loading);
           })
-          .catch(error => this.fetchWeather(lon, lat, loading));
+          .catch(error => this.fetchWeather(this.lon, this.lat, loading));
         });
     })
     .catch(error => {
@@ -87,6 +91,28 @@ export class HomePage {
         { 'city': this.locationService.city, 'date': new Date()} as DateCity);
       loading.dismiss();
     });
+  }
+
+  public changeLocation(): void {
+    let modal = this.modalController.create(LocationPage);
+    modal.onDidDismiss((data: HomeLocation) => {
+      if (data) {
+        this.dataStore.setData(CONFIG.WEATHER_UPDATE_AND_CITY,
+          { 'city': data.name, 'date': new Date()} as DateCity);
+        this.city = data.name;
+        this.locationService.city = data.name;
+        this.lat = data.lat;
+        this.lon = data.lon;
+
+        let loading = this.loadingCtrl.create({
+          content: 'Fetching location data, please wait...'
+        });
+        
+        loading.present();
+        this.fetchWeather(this.lon, this.lat, loading);
+      }
+    });
+    modal.present();
   }
 
   public setForecast(value: Forecast): void {

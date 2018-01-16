@@ -1,3 +1,11 @@
+.toolbar-content {
+    display: flex;
+
+    .search-icon {
+        font-size: 1.7em;
+    }
+}
+
 .weather-card {
     $image-size: 80px;
     display: flex;

@@ -7,6 +7,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+import { LocationPage } from '../pages/location/location';
 
 import { IonicStorageModule } from '@ionic/storage';
 
@@ -26,6 +27,7 @@ import { LocationService } from '../services/location.service';
     MyApp,
     HomePage,
     ListPage,
+    LocationPage,
     RoundPipe,
     WeatherImagePipe
   ],
@@ -40,7 +42,8 @@ import { LocationService } from '../services/location.service';
   entryComponents: [
     MyApp,
     HomePage,
-    ListPage
+    ListPage,
+    LocationPage,
   ],
   providers: [
     DataStore,

@@ -1,9 +1,14 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar class="home-nav">
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
     <ion-title class="header-city">{{city}}</ion-title>
+    <ion-buttons>
+      <button ion-button icon-only (click)="changeLocation()">
+        <ion-icon class="search-icon" name="search"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
