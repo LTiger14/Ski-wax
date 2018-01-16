@@ -42,7 +42,7 @@
     </ion-row>
     <ion-row class="recommendation-container">
       <p>Recommended wax: </p>
-      <ion-img class="wax-image" src="assets/wax/swix_v05.jpg"></ion-img>
+      <img *ngIf="waxSelectionService.waxes[0]" class="wax-image" src="{{'assets/wax/' + waxSelectionService.waxes[0].uri}}">
     </ion-row>
   </ion-grid>
 </ion-content>

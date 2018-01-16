@@ -11,6 +11,7 @@ import { DateCity, Forecast, DataPoint, SnowType, HomeLocation } from '../../ser
 import { LocationService } from '../../services/location.service';
 import { UtilsService } from '../../services/utils.service';
 import { LocationPage } from '../location/location';
+import { WaxSelectionService } from '../../services/wax-selection.service';
 
 @Component({
   selector: 'page-home',
@@ -32,11 +33,17 @@ export class HomePage {
     public loadingCtrl: LoadingController,
     public modalController: ModalController,
     public utilService: UtilsService,
+    public waxSelectionService: WaxSelectionService,
     private dataStore: DataStore,
     private locationService: LocationService,
     private weatherService: WeatherService) {
 
-      this.initializeWeather();
+      this.initApp();
+  }
+
+  private async initApp() {
+    var res = await this.initializeWeather();
+    console.log(res);
   }
 
   private initializeWeather() {
@@ -76,7 +83,7 @@ export class HomePage {
     this.dataStore.getData(CONFIG.WEATHER_DATA).then(data => {
       this.setForecast(data as Forecast);
       this.weatherImage = this.utilService.getWeatherIcon(this.forecast.currently.icon);      
-      console.log(this.forecast);
+      this.fetchWax();
     }).catch(error => this.fetchWeather(lon, lat, loading));
   }
 
@@ -84,13 +91,17 @@ export class HomePage {
     this.weatherService.getCurrentWeather(lon, lat)
     .subscribe(res => {
       this.setForecast(res as Forecast);
-      this.weatherImage = this.utilService.getWeatherIcon(this.forecast.currently.icon);      
-      console.log(this.forecast);
+      this.weatherImage = this.utilService.getWeatherIcon(this.forecast.currently.icon);
       this.dataStore.setData(CONFIG.WEATHER_DATA, res);
       this.dataStore.setData(CONFIG.WEATHER_UPDATE_AND_CITY,
         { 'city': this.locationService.city, 'date': new Date()} as DateCity);
+      this.fetchWax();
       loading.dismiss();
     });
+  }
+
+  private fetchWax(): void {
+    this.waxSelectionService.selectWax(this.forecast.currently.temperature, this.snowType);
   }
 
   public changeLocation(): void {
