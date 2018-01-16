@@ -94,7 +94,5 @@ export enum MetricPressure {
 }
 
 export enum SnowType {
-  FRESH_SNOW = 'FRESH_SNOW', 
-  OLD_SNOW = 'OLD_SNOW', 
-  MANMADE = 'MANMADE'
+  FRESH_SNOW, OLD_SNOW, MANMADE
 }

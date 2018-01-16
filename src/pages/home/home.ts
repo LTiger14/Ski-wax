@@ -20,6 +20,7 @@ export class HomePage {
   city: string;
   forecast: Forecast;
   futureItems: DataPoint[];
+  // TODO update model
   snowType: SnowType = SnowType.FRESH_SNOW;
   weatherImage: string;
 
