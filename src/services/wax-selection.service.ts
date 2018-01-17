@@ -13,7 +13,7 @@ export class WaxSelectionService {
 	}
 
 	selectWax(temp: number, snowType: SnowType, activity?: ActivityLevel): void {
-		this.waxes = this.swix.findWax(temp, snowType);
+		this.waxes = this.swix.findWax(temp, snowType, activity);
 		console.log(this.waxes);
 	}
 }

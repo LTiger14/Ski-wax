@@ -7,7 +7,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { DataStore } from '../../services/data-store';
 import { WeatherService } from '../../services/weather/weather.service';
 import { CONFIG } from '../../services/constant';
-import { DateCity, Forecast, DataPoint, SnowType, HomeLocation } from '../../services/model';
+import { DateCity, Forecast, DataPoint, SnowType, HomeLocation, ActivityLevel } from '../../services/model';
 import { LocationService } from '../../services/location.service';
 import { UtilsService } from '../../services/utils.service';
 import { LocationPage } from '../location/location';
@@ -19,6 +19,7 @@ import { WaxSelectionService } from '../../services/wax-selection.service';
 })
 export class HomePage {
   //Hack
+  activityLevels = ActivityLevel;
   snowTypes = SnowType;
 
   city: string;
@@ -28,6 +29,7 @@ export class HomePage {
   lon: number;
   // TODO update model
   snowType: SnowType = SnowType.OLD_SNOW;
+  activityLevel: ActivityLevel = ActivityLevel.SPORT;
   weatherImage: string;
 
   constructor(public navCtrl: NavController,
@@ -103,7 +105,7 @@ export class HomePage {
   }
 
   private fetchWax(): void {
-    this.waxSelectionService.selectWax(this.forecast.currently.temperature, this.snowType);
+    this.waxSelectionService.selectWax(this.forecast.currently.temperature, this.snowType, this.activityLevel);
   }
 
   public onSnowChange(): void {

@@ -33,6 +33,16 @@
     <ion-row class="snow-container">
       <ion-item>
         <ion-label>Snow Conditions</ion-label>
+        <ion-select [(ngModel)]="activityLevel" (ngModelChange)='onSnowChange()'>
+          <ion-option value="{{activityLevels.ACTIVE}}">Active</ion-option>
+          <ion-option value="{{activityLevels.SPORT}}">Sport</ion-option>
+          <ion-option value="{{activityLevels.RACING}}">Racing</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-row>
+    <ion-row *ngIf="activityLevel != activityLevels.ACTIVE" class="snow-container">
+      <ion-item>
+        <ion-label>Snow Conditions</ion-label>
         <ion-select [(ngModel)]="snowType" (ngModelChange)='onSnowChange()'>
           <ion-option value="{{snowTypes.NEW_SNOW}}">New snow</ion-option>
           <ion-option value="{{snowTypes.OLD_SNOW}}">Old snow</ion-option>

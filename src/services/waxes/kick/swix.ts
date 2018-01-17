@@ -74,8 +74,18 @@ export class Swix implements WaxSelector {
 				});
 			}
 		}
+
+		if (response.length > 1) {
+			if (activityLevel == ActivityLevel.ACTIVE) {
+				response = [response[response.length-1]];
+			} else if (activityLevel === ActivityLevel.SPORT || activityLevel === ActivityLevel.RACING) {			
+				response = [response[0]];
+			}
+		}
+
 		return response;
 	}
+
 
 	private between(x, min, max): boolean {
 		return x>=min && x<=max;
