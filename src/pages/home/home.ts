@@ -18,6 +18,8 @@ import { WaxSelectionService } from '../../services/wax-selection.service';
   templateUrl: 'home.html'
 })
 export class HomePage {
+  //Hack
+  snowTypes = SnowType;
 
   city: string;
   forecast: Forecast;
@@ -25,7 +27,7 @@ export class HomePage {
   lat: number;
   lon: number;
   // TODO update model
-  snowType: SnowType = SnowType.NEW_SNOW;
+  snowType: SnowType = SnowType.OLD_SNOW;
   weatherImage: string;
 
   constructor(public navCtrl: NavController,
@@ -102,6 +104,10 @@ export class HomePage {
 
   private fetchWax(): void {
     this.waxSelectionService.selectWax(this.forecast.currently.temperature, this.snowType);
+  }
+
+  public onSnowChange(): void {
+    this.fetchWax();
   }
 
   public changeLocation(): void {

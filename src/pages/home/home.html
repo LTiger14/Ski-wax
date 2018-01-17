@@ -33,10 +33,10 @@
     <ion-row class="snow-container">
       <ion-item>
         <ion-label>Snow Conditions</ion-label>
-        <ion-select [(ngModel)]="snowType">
-          <ion-option value="NEW_SNOW">New snow</ion-option>
-          <ion-option value="OLD_SNOW">Old snow</ion-option>
-          <ion-option value="MANMADE">Manmade</ion-option>
+        <ion-select [(ngModel)]="snowType" (ngModelChange)='onSnowChange()'>
+          <ion-option value="{{snowTypes.NEW_SNOW}}">New snow</ion-option>
+          <ion-option value="{{snowTypes.OLD_SNOW}}">Old snow</ion-option>
+          <ion-option value="{{snowTypes.MANMADE}}">Manmade</ion-option>
         </ion-select>
       </ion-item>
     </ion-row>
