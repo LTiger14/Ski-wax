@@ -1,4 +1,4 @@
-import { Wax, WaxSelector, SnowType, ActivityLevel } from '../../model';
+import { Wax, WaxSelector } from '../../model';
 
 export class Swix implements WaxSelector {
 	waxes: Array<Wax> = [
@@ -52,42 +52,24 @@ export class Swix implements WaxSelector {
 		}
 		];
 
-
-	findWax(temp: number, snowType: SnowType, activityLevel?: ActivityLevel): Array<Wax> {
-		let response: Array<Wax> = [];
-		if (temp < -30) {
-			response = [this.waxes[0]];
-		} else if (temp > 3) {
-			response = [this.waxes[this.waxes.length - 1]];
-		} else {
-			if (snowType === SnowType.NEW_SNOW) {
-				this.waxes.forEach((wax: Wax) => {
-					if (this.between(temp, wax.newSnow.min, wax.newSnow.max)) {
-						response.push(wax);
-					}
-				});
-			} else {
-				this.waxes.forEach((wax: Wax) => {
-					if (this.between(temp, wax.oldSnow.min, wax.oldSnow.max)) {
-						response.push(wax);
-					}
-				});
-			}
-		}
-
-		if (response.length > 1) {
-			if (activityLevel == ActivityLevel.ACTIVE) {
-				response = [response[response.length-1]];
-			} else if (activityLevel === ActivityLevel.SPORT || activityLevel === ActivityLevel.RACING) {			
-				response = [response[0]];
-			}
-		}
-
-		return response;
-	}
-
-
-	private between(x, min, max): boolean {
-		return x>=min && x<=max;
-	}
+		sprays: Array<Wax> = [
+			{
+				name: 'Blue Grip Spray',
+				uri: 'swix_blue-grip-spray.jpg',
+				newSnow: { min: -15, max: -2 },
+				oldSnow: { min: -15, max: -2 }
+			},
+			{
+				name: 'Violet Grip Spray',
+				uri: 'swix_violet-grip-spray.jpg',
+				newSnow: { min: -3, max: 0 },
+				oldSnow: { min: -3, max: 0 }
+			},
+			{
+				name: 'Red Grip Spray',
+				uri: 'swix_red-grip-spray.jpg',
+				newSnow: { min: 0, max: 3 },
+				oldSnow: { min: 0, max: 3 }
+			},
+		]; 
 }

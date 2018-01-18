@@ -105,7 +105,9 @@ export class HomePage {
   }
 
   private fetchWax(): void {
-    this.waxSelectionService.selectWax(this.forecast.currently.temperature, this.snowType, this.activityLevel);
+    this.waxSelectionService
+      .selectWax(this.forecast.currently.temperature, this.snowType,
+        this.activityLevel, this.forecast.currently.humidity);
   }
 
   public onSnowChange(): void {

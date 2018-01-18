@@ -40,7 +40,7 @@
         </ion-select>
       </ion-item>
     </ion-row>
-    <ion-row *ngIf="activityLevel != activityLevels.ACTIVE" class="snow-container">
+    <ion-row class="snow-container">
       <ion-item>
         <ion-label>Snow Conditions</ion-label>
         <ion-select [(ngModel)]="snowType" (ngModelChange)='onSnowChange()'>
@@ -52,7 +52,7 @@
     </ion-row>
     <ion-row class="recommendation-container">
       <p>Recommended wax: </p>
-      <img *ngIf="waxSelectionService.waxes[0]" class="wax-image" src="{{'assets/wax/' + waxSelectionService.waxes[0].uri}}">
+      <img *ngIf="waxSelectionService.options[0]" class="wax-image" src="{{'assets/wax/' + waxSelectionService.options[0].uri}}">
     </ion-row>
   </ion-grid>
 </ion-content>

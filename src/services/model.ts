@@ -86,7 +86,8 @@ export interface Wax {
 }
 
 export interface WaxSelector {
-  findWax(temp: number, snowType: SnowType, activityLevel?: ActivityLevel): Array<Wax>;
+  waxes: Array<Wax>;
+  sprays: Array<Wax>;
 }
 
 export enum ActivityLevel {
