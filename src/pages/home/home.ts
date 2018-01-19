@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ModalController, NavController } from 'ionic-angular';
 import { Loading } from 'ionic-angular/components/loading/loading';
 import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
@@ -6,8 +6,8 @@ import { Geolocation } from '@ionic-native/geolocation';
 
 import { DataStore } from '../../services/data-store';
 import { WeatherService } from '../../services/weather/weather.service';
-import { CONFIG } from '../../services/constant';
-import { DateCity, Forecast, DataPoint, SnowType, HomeLocation, ActivityLevel } from '../../services/model';
+import { CONFIG, DEFAULT_METRICS } from '../../services/constant';
+import { DateCity, Forecast, DataPoint, SnowType, HomeLocation, ActivityLevel, Metrics, MetricTemp } from '../../services/model';
 import { LocationService } from '../../services/location.service';
 import { UtilsService } from '../../services/utils.service';
 import { LocationPage } from '../location/location';
@@ -17,16 +17,18 @@ import { WaxSelectionService } from '../../services/wax-selection.service';
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
+export class HomePage implements OnInit {
   //Hack
   activityLevels = ActivityLevel;
   snowTypes = SnowType;
 
   city: string;
   forecast: Forecast;
+  temperature: number;
   futureItems: DataPoint[];
   lat: number;
   lon: number;
+  metrics: Metrics;
   // TODO update model
   snowType: SnowType = SnowType.OLD_SNOW;
   activityLevel: ActivityLevel = ActivityLevel.SPORT;
@@ -41,13 +43,32 @@ export class HomePage {
     private dataStore: DataStore,
     private locationService: LocationService,
     private weatherService: WeatherService) {
-
-      this.initApp();
   }
 
-  private async initApp() {
-    var res = await this.initializeWeather();
-    console.log(res);
+  ngOnInit() {
+    this.initializeWeather();
+    this.checkConvert();
+
+    //Setup base data
+    this.dataStore.getData(CONFIG.METRICS_PREFERENCES).then(data => {
+      if (data === null) {
+        this.dataStore.setData(CONFIG.METRICS_PREFERENCES, DEFAULT_METRICS);
+        this.metrics = DEFAULT_METRICS;
+      } else {
+        this.metrics = data;
+      }
+    }
+    );
+  }
+
+  private checkConvert() {
+    // TODO once the ticket for the UI is done
+    // if(localStorage.getItem('new metrics')) {
+    //   this.metrics = JSON.parse(localStorage.getItem('new metrics')) as Metrics;
+    //   this.temperature = this.metrics.temp === MetricTemp.C ?
+    //     this.forecast.currently.temperature: this.utilService.convertTemp(this.forecast.currently.temperature);
+    //   localStorage.removeItem('new metrics');
+    // }
   }
 
   private initializeWeather() {
@@ -92,7 +113,7 @@ export class HomePage {
   }
 
   private fetchWeather(lon: number, lat: number, loading: Loading): void {
-    this.weatherService.getCurrentWeather(lon, lat)
+    this.weatherService.getCurrentWeather(this.metrics, lon, lat)
     .subscribe(res => {
       this.setForecast(res as Forecast);
       this.weatherImage = this.utilService.getWeatherIcon(this.forecast.currently.icon);
@@ -138,6 +159,7 @@ export class HomePage {
 
   public setForecast(value: Forecast): void {
     this.forecast = value;
+    this.temperature = value.currently.temperature;
     this.futureItems = value.hourly.data.slice(1,6);
   }
 

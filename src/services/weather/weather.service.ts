@@ -5,6 +5,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/of';
 
+import { Metrics, MetricTemp } from '../model';
+
 
 @Injectable()
 export class WeatherService {
@@ -16,8 +18,8 @@ export class WeatherService {
     }
 
     // TODO units pick
-    getCurrentWeather(lon: number, lat: number) {
-        return this.jsonp.get(this.BASE_URL + `${this.APIKEY}/${lat},${lon}?units=auto&callback=JSONP_CALLBACK`)
+    getCurrentWeather(metrics: Metrics, lon: number, lat: number) {
+        return this.jsonp.get(this.formatUrl(metrics, lon, lat))
             .map(res => res.json())
             .catch(error => this.handleError(error));
     }
@@ -33,5 +35,10 @@ export class WeatherService {
         }
         console.error(errMsg);
         return Observable.throw(errMsg);
+    }
+
+    private formatUrl(metrics: Metrics, lon: number, lat: number): string {
+        let units = metrics.temp === MetricTemp.C ? 'si': 'us';
+        return this.BASE_URL + `${this.APIKEY}/${lat},${lon}?units=${units}&exclude=minutely&callback=JSONP_CALLBACK`;
     }
 }

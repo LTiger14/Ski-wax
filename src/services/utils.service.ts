@@ -10,7 +10,6 @@ export class UtilsService {
         return differenceInHours(weatherDate, Date.now()) > VALID_WEATHER_DURATION ? false: true;
     }
 
-    // TODO once google api is integrated
     isLocationValid(currentCity: string, savedCity: string): boolean {
         return currentCity === savedCity? true: false;
     }
@@ -21,5 +20,10 @@ export class UtilsService {
         } else {
           return 'assets/imgs/default.png';
         }
+    }
+
+    // Util method to convert C to F
+    convertTemp(temp: number): number {
+        return temp * 1.8 + 32;
     }
 }

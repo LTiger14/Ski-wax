@@ -17,8 +17,8 @@
     <ion-row>
       <ion-col class="weather-card">
           <div class="temperature" *ngIf="forecast">
-            <span class="temp-num">{{forecast.currently.temperature | round}}</span>
-            <span class="temp-unit">C</span>            
+            <span class="temp-num">{{temperature | round}}</span>
+            <span class="temp-unit">{{metrics.temp}}</span>            
           </div>
           <ion-img class="weather-icon" src="{{weatherImage}}"></ion-img>
           <div class="wind">Wind</div>

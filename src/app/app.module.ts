@@ -8,6 +8,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 import { LocationPage } from '../pages/location/location';
+import { SettingsPage } from '../pages/settings/settings';
 
 import { IonicStorageModule } from '@ionic/storage';
 
@@ -29,6 +30,7 @@ import { WaxSelectionService } from '../services/wax-selection.service';
     HomePage,
     ListPage,
     LocationPage,
+    SettingsPage,
     RoundPipe,
     WeatherImagePipe
   ],
@@ -45,6 +47,7 @@ import { WaxSelectionService } from '../services/wax-selection.service';
     HomePage,
     ListPage,
     LocationPage,
+    SettingsPage,
   ],
   providers: [
     DataStore,

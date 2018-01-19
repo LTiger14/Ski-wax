@@ -71,10 +71,6 @@ export interface DataPoint {
 
 export interface Metrics {
   temp: MetricTemp;
-  length: MetricLength;
-  distance: MetricDistance;
-  time: number;
-  pressure: MetricPressure;
 }
 
 export interface Wax {
@@ -95,19 +91,8 @@ export enum ActivityLevel {
 }
 
 export enum MetricTemp {
-  F, C
-}
-
-export enum MetricLength {
-  IN, CM
-}
-
-export enum MetricDistance {
-  MI, KM
-}
-
-export enum MetricPressure {
-  MBAR, HPA
+  F = 'F',
+  C = 'C'
 }
 
 export enum SnowType {
