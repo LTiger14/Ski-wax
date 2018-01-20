@@ -7,7 +7,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { DataStore } from '../../services/data-store';
 import { WeatherService } from '../../services/weather/weather.service';
 import { CONFIG, DEFAULT_METRICS } from '../../services/constant';
-import { DateCity, Forecast, DataPoint, SnowType, HomeLocation, ActivityLevel, Metrics, MetricTemp } from '../../services/model';
+import { DateCity, Forecast, DataPoint, SnowType, HomeLocation, ActivityLevel, Metrics } from '../../services/model';
 import { LocationService } from '../../services/location.service';
 import { UtilsService } from '../../services/utils.service';
 import { LocationPage } from '../location/location';
@@ -48,7 +48,6 @@ export class HomePage implements OnInit {
   ngOnInit() {
     this.initializeWeather();
     this.checkConvert();
-
     //Setup base data
     this.dataStore.getData(CONFIG.METRICS_PREFERENCES).then(data => {
       if (data === null) {
@@ -126,6 +125,7 @@ export class HomePage implements OnInit {
   }
 
   private fetchWax(): void {
+    console.log('>>>>>> Forecast', this.forecast);
     this.waxSelectionService
       .selectWax(this.forecast.currently.temperature, this.snowType,
         this.activityLevel, this.forecast.currently.humidity);

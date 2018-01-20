@@ -81,9 +81,11 @@ export interface Wax {
   oldSnow: { min: number, max: number };
 }
 
-export interface WaxSelector {
+export interface WaxesModel {
   waxes: Array<Wax>;
   sprays: Array<Wax>;
+  performanceWaxes?: Array<Wax>;
+  highPerformanceWaxes?: Array<Wax>;
 }
 
 export enum ActivityLevel {
