@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { JsonpModule } from '@angular/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { Diagnostic } from '@ionic-native/diagnostic';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
@@ -51,6 +52,7 @@ import { WaxSelectionService } from '../services/wax-selection.service';
   ],
   providers: [
     DataStore,
+    Diagnostic,
     Geolocation,
     LocationService,
     SplashScreen,

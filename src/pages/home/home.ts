@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, NavController } from 'ionic-angular';
 import { Loading } from 'ionic-angular/components/loading/loading';
 import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
+import { Diagnostic } from '@ionic-native/diagnostic';
 import { Geolocation } from '@ionic-native/geolocation';
 
 import { DataStore } from '../../services/data-store';
@@ -12,6 +13,7 @@ import { LocationService } from '../../services/location.service';
 import { UtilsService } from '../../services/utils.service';
 import { LocationPage } from '../location/location';
 import { WaxSelectionService } from '../../services/wax-selection.service';
+import { ToastController } from 'ionic-angular/components/toast/toast-controller';
 
 @Component({
   selector: 'page-home',
@@ -41,14 +43,31 @@ export class HomePage implements OnInit {
     public utilService: UtilsService,
     public waxSelectionService: WaxSelectionService,
     private dataStore: DataStore,
+    private diagnostic: Diagnostic,
     private locationService: LocationService,
+    private toastCtr: ToastController,
     private weatherService: WeatherService) {
   }
 
   ngOnInit() {
+    // Check if location is on UNCOMMENT BEFORE RELEASE
+    // this.diagnostic.isLocationAvailable().then(
+    //   (value) => {
+    //     if (value === true) {
+    //       this.initializeWeather();
+    //     } else {
+    //       let toast = this.toastCtr.create({
+    //         message: 'Location service unavailable',
+    //         duration: 3000,
+    //         position: 'bottom'
+    //       });
+    //       toast.present();
+    //       this.changeLocation();
+    //     }
+    //   });
     this.initializeWeather();
     this.checkConvert();
-    //Setup base data
+    // Setup base data
     this.dataStore.getData(CONFIG.METRICS_PREFERENCES).then(data => {
       if (data === null) {
         this.dataStore.setData(CONFIG.METRICS_PREFERENCES, DEFAULT_METRICS);
