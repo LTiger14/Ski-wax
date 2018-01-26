@@ -32,10 +32,9 @@ export class WaxSelectionService {
 
 	findWax(waxes: Array<Wax>, temp: number, snowType: SnowType, activityLevel: ActivityLevel, humidity?: number): Array<Wax> {
 		let response: Array<Wax> = [];
-		if (temp < -30) {
-			response = [waxes[0]];
-		} else if (temp > 3) {
-			response = [waxes[waxes.length - 1]];
+		let outOfBounds: Wax = this.validateTemp(waxes, temp, snowType);
+		if (outOfBounds) {
+			response = [outOfBounds];
 		} else {
 			if (snowType === SnowType.NEW_SNOW) {
 				waxes.forEach((wax: Wax) => {
@@ -60,6 +59,21 @@ export class WaxSelectionService {
 			}
 		}
 		return response;
+	}
+
+	private validateTemp(waxes: Array<Wax>, temp: number, snowType: SnowType): Wax {
+		let wax: Wax = null;
+		switch(snowType) {
+			case SnowType.NEW_SNOW:
+				wax = temp < waxes[0].newSnow.min ? waxes[0]:
+					(temp > waxes[waxes.length - 1].newSnow.max ? waxes[waxes.length - 1] : null);
+				break;
+			case SnowType.OLD_SNOW:
+				wax = temp < waxes[0].oldSnow.min ? waxes[0]:
+					(temp > waxes[waxes.length - 1].oldSnow.max ? waxes[waxes.length - 1] : null);
+				break;
+		}
+		return wax;
 	}
 
 	private between(x, min, max): boolean {

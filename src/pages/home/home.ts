@@ -125,6 +125,7 @@ export class HomePage implements OnInit {
   private loadWeather(lon: number, lat: number, loading: Loading): void {
     this.dataStore.getData(CONFIG.WEATHER_DATA).then(data => {
       this.setForecast(data as Forecast);
+      this.snowType = this.utilService.getSnowType([this.forecast.currently]);
       this.weatherImage = this.utilService.getWeatherIcon(this.forecast.currently.icon);      
       this.fetchWax();
     }).catch(error => this.fetchWeather(lon, lat, loading));
@@ -134,6 +135,7 @@ export class HomePage implements OnInit {
     this.weatherService.getCurrentWeather(this.metrics, lon, lat)
     .subscribe(res => {
       this.setForecast(res as Forecast);
+      this.snowType = this.utilService.getSnowType([this.forecast.currently]);
       this.weatherImage = this.utilService.getWeatherIcon(this.forecast.currently.icon);
       this.dataStore.setData(CONFIG.WEATHER_DATA, res);
       this.dataStore.setData(CONFIG.WEATHER_UPDATE_AND_CITY,
