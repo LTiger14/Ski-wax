@@ -1,3 +1,4 @@
+import { Component } from '@angular/core';
 export interface HomeLocation {
   name?: string,
   lat: number,
@@ -71,6 +72,14 @@ export interface DataPoint {
 
 export interface Metrics {
   temp: MetricTemp;
+}
+
+export interface PageInterface {
+  title: string;
+  name: any;
+  icon: string;
+  component: any;
+  index?: number;
 }
 
 export interface Wax {

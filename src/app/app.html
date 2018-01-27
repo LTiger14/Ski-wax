@@ -6,9 +6,10 @@
   </ion-header>
 
   <ion-content>
-    <ion-list>
-      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
+    <ion-list *ngFor="let page of pages">
+      <button menuClose ion-item *ngFor="let p of page.items" (click)="openPage(p)" [ngClass]="{'tab-selected': isActive(p)}">
+        <ion-icon item-left [name]="p.icon"></ion-icon>
+        <span ion-text>{{p.title}}</span>
       </button>
     </ion-list>
   </ion-content>

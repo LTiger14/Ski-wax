@@ -4,8 +4,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { SettingsPage } from '../pages/settings/settings';
+import { PageInterface } from '../services/model';
 
 @Component({
   templateUrl: 'app.html'
@@ -15,7 +15,7 @@ export class MyApp {
 
   rootPage: any = HomePage;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{items: PageInterface[]}>;
 
   constructor(public platform: Platform,
     public statusBar: StatusBar,
@@ -24,9 +24,12 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage },
-      { title: 'Settings', component: SettingsPage}
+      {
+        items: [
+          { title: 'Home', name: 'HomePage', component: HomePage, index: 0, icon: 'home' },
+          { title: 'Settings', name: 'SettingsPage', component: SettingsPage, index: 1, icon: 'settings'}
+        ]
+      }
     ];
 
   }
@@ -44,5 +47,16 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+
+  // Put the gray background over the tab if active
+  isActive(page: PageInterface): boolean {
+    let childNav;
+    if (this.nav.getActive())
+    childNav = this.nav.getActive().name;
+    if (childNav) {
+      return childNav === page.name;
+    }
+    return false;
   }
 }
