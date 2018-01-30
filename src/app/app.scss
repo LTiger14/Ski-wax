@@ -14,6 +14,14 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+// COLORS
+$lightest: #f9f7f7;
+$light: #dbe2ef;
+$light-blue: #3f72af;
+$dark-blue: #112d4e;
+$dark-text: #0d0d0d;
+
 .tab-selected {
     background-color: #f2f2f2;
 }
