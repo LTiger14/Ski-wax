@@ -1,4 +1,3 @@
-import { Component } from '@angular/core';
 export interface HomeLocation {
   name?: string,
   lat: number,
