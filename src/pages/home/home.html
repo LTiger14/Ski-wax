@@ -20,14 +20,13 @@
             <span class="temp-num">{{temperature | round}}</span>
             <span class="temp-unit">{{metrics.temp}}</span>            
           </div>
-          <!--<ion-img class="weather-icon" src="{{weatherImage}}"></ion-img>-->
-          <i class="wi wi-night-sleet"></i>
+          <i class="wi" [ngClass]="weatherImage"></i>
           <div class="wind">Wind</div>
       </ion-col>
     </ion-row>
     <ion-row class="future-forecast">
       <ion-col class="future-item" *ngFor="let item of futureItems">
-        <img class="future-icon" src="{{utilService.getWeatherIcon(item.icon)}}">
+        <i class="wi" [ngClass]="utilService.getWeatherIcon(item.icon)"></i>
         <div>{{item.temperature | round}}</div>
       </ion-col>
     </ion-row>

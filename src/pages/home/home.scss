@@ -26,9 +26,8 @@
         line-height: $image-size;
     }
 
-    .weather-icon {
-        height: $image-size;
-        width: $image-size;
+    i {
+        font-size: 4em;
     }
 }
 
@@ -41,11 +40,6 @@
 
         &:first-of-type {
             border-left: 1px gray solid;
-        }
-
-        .future-icon {
-            height: 25x;
-            width: 25px;
         }
     }
 }

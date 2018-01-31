@@ -16,11 +16,42 @@ export class UtilsService {
     }
 
     getWeatherIcon(icon: string): string {
-        if (icon) {
-          return 'assets/imgs/' + icon + '.png';
-        } else {
-          return 'assets/imgs/default.png';
+        let weatherIcon: string;
+        console.log(icon);
+        switch (icon) {
+            case 'clear-day':
+                weatherIcon = 'day-sunny';
+                break;
+            case 'clear-night':
+                weatherIcon = 'night-clear';
+                break;
+            case 'cloudy':
+            case 'fog':
+            case 'rain':
+            case 'sleet':
+            case 'snow':
+            case 'sunrise':
+            case 'sunset':
+                weatherIcon = icon;
+                break;
+            case 'default':
+                weatherIcon = 'na';
+                break;
+            case 'partly-cloudy-day':
+                weatherIcon = 'day-cloudy';
+                break;
+            case 'partly-cloudy-night':
+                weatherIcon = 'night-alt-cloudy';
+                break;
+            case 'wind':
+                weatherIcon = 'strong-wind';
+                break;
+            default:
+                weatherIcon = 'alien'
+                break;
         }
+
+        return `wi-${weatherIcon}`;
     }
 
     getSnowType(data: Array<DataPoint>): SnowType {
