@@ -6,40 +6,45 @@
     }
 }
 
-.weather-card {
-    $image-size: 80px;
-    display: flex;
-    justify-content: space-around;
-    background-color: rgba($color: lightblue, $alpha: .1);
-
-    .temperature {
-        height: $image-size;
-        line-height: $image-size;
-
-        .temp-num {
-            font-size: 2em;
-        }
-    }
-
-    .wind {
-        height: $image-size;
-        line-height: $image-size;
-    }
-
-    i {
-        font-size: 4em;
-    }
+.grid {
+    padding: 0;
 }
 
-.future-forecast {
-    display: flex;
-
-    .future-item {
-        text-align: center;
-        border-right: 1px gray solid;
-
-        &:first-of-type {
-            border-left: 1px gray solid;
+.weather {
+    border-bottom: 1px solid #999;
+    .weather-card {
+        $image-size: 80px;
+        display: flex;
+        justify-content: space-around;
+        padding: 10px 10px 0 10px;
+    
+        .temperature {
+            height: $image-size;
+            line-height: $image-size;
+    
+            .temp-num {
+                font-size: 2em;
+            }
+        }
+    
+        .wind {
+            height: $image-size;
+            line-height: $image-size;
+        }
+    
+        i {
+            font-size: 4em;
+            height: $image-size;
+            line-height: $image-size;
+        }
+    }
+    
+    .future-forecast {
+        display: flex;
+        padding: 10px;
+    
+        .future-item {
+            text-align: center;
         }
     }
 }

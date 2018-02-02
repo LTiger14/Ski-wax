@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, NavController } from 'ionic-angular';
 import { Loading } from 'ionic-angular/components/loading/loading';
 import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
+import { ToastController } from 'ionic-angular/components/toast/toast-controller';
+import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { Geolocation } from '@ionic-native/geolocation';
+import * as moment from 'moment-timezone';
 
 import { DataStore } from '../../services/data-store';
 import { WeatherService } from '../../services/weather/weather.service';
@@ -13,16 +16,17 @@ import { LocationService } from '../../services/location.service';
 import { UtilsService } from '../../services/utils.service';
 import { LocationPage } from '../location/location';
 import { WaxSelectionService } from '../../services/wax-selection.service';
-import { ToastController } from 'ionic-angular/components/toast/toast-controller';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage implements OnInit {
-  //Hack
+  //Hacks
   activityLevels = ActivityLevel;
   snowTypes = SnowType;
+  moment = moment;
+  Date = Date;
 
   city: string;
   forecast: Forecast;
@@ -36,7 +40,8 @@ export class HomePage implements OnInit {
   activityLevel: ActivityLevel = ActivityLevel.SPORT;
   weatherImage: string;
 
-  constructor(public navCtrl: NavController,
+  constructor(public alertCtrl: AlertController,
+    public navCtrl: NavController,
     public geolocation: Geolocation,
     public loadingCtrl: LoadingController,
     public modalController: ModalController,
@@ -117,6 +122,15 @@ export class HomePage implements OnInit {
     })
     .catch(error => {
       // TODO : handle error
+      let alert;
+      if (error.constructor.name === 'PositionError') {
+        alert = this.alertCtrl.create({
+          title: 'Location error',
+          subTitle: 'Unable to fetch device location please check the network connection.',
+          buttons: ['Ok']
+        });
+        alert.present();
+      }
       console.error('An error occured' + error);
       loading.dismiss();
     });
@@ -182,6 +196,8 @@ export class HomePage implements OnInit {
     this.forecast = value;
     this.temperature = value.currently.temperature;
     this.futureItems = value.hourly.data.slice(1,6);
+    this.futureItems.forEach((item, index) => 
+      item.stringTemp = this.utilService.addTime(moment.tz(Date.now(), this.forecast.timezone).format('ha'), index));
   }
 
   private initializePosition(): Promise<any> {

@@ -13,4 +13,4 @@ export const DEFAULT_METRICS = {
 }
 
 // Number of hours the weather data remains valid
-export const VALID_WEATHER_DURATION = 8;
+export const VALID_WEATHER_DURATION = 1;

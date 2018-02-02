@@ -17,7 +17,6 @@ export class UtilsService {
 
     getWeatherIcon(icon: string): string {
         let weatherIcon: string;
-        console.log(icon);
         switch (icon) {
             case 'clear-day':
                 weatherIcon = 'day-sunny';
@@ -65,5 +64,29 @@ export class UtilsService {
     // Util method to convert C to F
     convertTemp(temp: number): number {
         return temp * 1.8 + 32;
+    }
+
+    addTime(time: string, index: number): string {
+        let hour: number;
+        let amPm: string;
+        let res: number;
+        if(time.length === 4) {
+            hour = Number.parseInt(time.substring(0,2)) + index;
+            amPm = time.substring(2,4);          
+        } else {
+            hour = Number.parseInt(time.substring(0,1)) + index;            
+            amPm = time.substring(1,3);
+        }
+        res = this.findHour(hour);
+        amPm = this.findAmPm(hour, amPm);   
+
+        return res + amPm;
+    }
+
+    private findHour(num: number): number {
+        return num > 12? num - 12: num;
+    }
+    private findAmPm(num: number, str: string): string {
+        return (num === 12 && str === 'pm')? 'am': 'pm';
     }
 }

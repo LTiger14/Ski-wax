@@ -53,6 +53,7 @@ export interface DataPoint {
   precipType?: string;
   //millibars
   pressure?: number;
+  stringTemp?: string;
   summary?: string;
   sunriseTime?: number;
   sunsetTime?: number;
