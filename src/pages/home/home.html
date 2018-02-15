@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-navbar class="home-nav">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title class="header-city">{{city}}</ion-title>
+    <ion-buttons>
+      <button ion-button icon-only (click)="changeLocation()">
+        <ion-icon class="search-icon" name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <div class="weather">
+      <ion-row>
+        <ion-col class="weather-card">
+          <div class="temperature" *ngIf="forecast">
+            <span class="temp-num">{{temperature | round}}</span>
+            <span class="temp-unit">{{metrics.temp}}</span>
+          </div>
+          <i class="wi" [ngClass]="weatherImage"></i>
+          <div class="wind">Wind</div>
+        </ion-col>
+      </ion-row>
+      <ion-row class="future-forecast">
+        <ion-col class="future-item" *ngFor="let item of futureItems; let i = index" [attr.data-index]="i">
+          <i class="wi" [ngClass]="utilService.getWeatherIcon(item.icon)"></i>
+          <div>{{item.temperature | round}}</div>
+          <div>{{item.stringTemp}}</div>
+        </ion-col>
+      </ion-row>
+    </div>
+    <ion-row class="snow-container">
+      <ion-item>
+        <ion-label>Snow Conditions</ion-label>
+        <ion-select [(ngModel)]="activityLevel" (ngModelChange)='onSnowChange()'>
+          <ion-option value="{{activityLevels.ACTIVE}}">Active</ion-option>
+          <ion-option value="{{activityLevels.SPORT}}">Sport</ion-option>
+          <ion-option value="{{activityLevels.RACING}}">Racing</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-row>
+    <ion-row class="snow-container">
+      <ion-item>
+        <ion-label>Snow Conditions</ion-label>
+        <ion-select [(ngModel)]="snowType" (ngModelChange)='onSnowChange()'>
+          <ion-option value="{{snowTypes.NEW_SNOW}}">New snow</ion-option>
+          <ion-option value="{{snowTypes.OLD_SNOW}}">Old snow</ion-option>
+          <ion-option value="{{snowTypes.MANMADE}}">Manmade</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-row>
+    <ion-row class="recommendation-container">
+      <p>Recommended wax: </p>
+      <img *ngIf="waxSelectionService.options[0]" class="wax-image" src="{{'assets/wax/' + waxSelectionService.options[0].uri}}">
+    </ion-row>
+  </ion-grid>
+</ion-content>

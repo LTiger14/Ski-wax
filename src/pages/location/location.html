@@ -1,0 +1,28 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Enter a city</ion-title>
+    <ion-buttons>
+      <button showWhen="ios" ion-button (click)="dismiss()">
+        <span ion-text color="white">Cancel</span>
+      </button>
+      <button showWhen="android" ion-button icon-only (click)="dismiss()">
+        <ion-icon name="md-close"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-searchbar
+    [(ngModel)]="query"
+    (ionInput)="updateList()"
+    #searchInput>
+  </ion-searchbar>
+  <ion-list>
+    <ion-item *ngFor="let item of autocompleteItems"
+      (click)="selectItem(item)">{{ item.description }}</ion-item>
+  </ion-list>
+</ion-content>

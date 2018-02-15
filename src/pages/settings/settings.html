@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Settings</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+        <div>Metrics</div>
+    </ion-row>
+    <ion-row>
+        <ion-item>
+          <ion-label>Temperature</ion-label>
+          <ion-select *ngIf="metrics" [(ngModel)]="metrics.temp" (ngModelChange)="savePrefs()">
+            <ion-option value="C">Celsius</ion-option>
+            <ion-option value="F">Fahrenheit</ion-option>
+          </ion-select>
+        </ion-item>
+    </ion-row>
+  </ion-grid>
+</ion-content>
