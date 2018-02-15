@@ -58,11 +58,22 @@
     flex-direction: column;
     padding-top: 1em;
 
-    .wax-image {
-        max-height: 240px;
-        max-width: 120px;
-        width: auto;
-        height: auto;
-        margin: auto;
+    .wax-recommendations {
+        display: flex;
+
+        .wax-text {
+            .title {
+
+            }
+            .description {
+                
+            }
+        }
+        .wax-image {
+            max-height: 240px;
+            max-width: 120px;
+            width: auto;
+            height: auto;
+        }
     }
 }

@@ -8,7 +8,7 @@ import 'rxjs/add/observable/of';
 export class LocationService {
 
 	private readonly API_URL = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=';
-	private readonly API_KEY = 'AIzaSyA6VifiHsiLsU8iDWI8tVliUQucZ9y-YTU';
+	private readonly API_KEY = '';
 
 	city: string = null;
 

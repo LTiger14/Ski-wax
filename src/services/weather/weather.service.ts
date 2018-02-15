@@ -12,7 +12,7 @@ import { Metrics, MetricTemp } from '../model';
 export class WeatherService {
 
     private readonly BASE_URL = 'https://api.darksky.net/forecast/';
-    private readonly APIKEY = '2bfda52e55a4d5bd32c5b340b378ecd0';
+    private readonly APIKEY = '';
 
     constructor(private jsonp: Jsonp) {
     }
