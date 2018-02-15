@@ -55,7 +55,14 @@
     </ion-row>
     <ion-row class="recommendation-container">
       <p>Recommended wax: </p>
-      <img *ngIf="waxSelectionService.options[0]" class="wax-image" src="{{'assets/wax/' + waxSelectionService.options[0].uri}}">
+      <div class="wax-recommendations">
+        <img *ngIf="waxSelectionService.options[0]" class="wax-image" src="{{'assets/wax/' + waxSelectionService.options[0].uri}}">
+        <div *ngIf="waxSelectionService.options[0]" class="wax-text">
+            <span class="title">{{waxSelectionService.options[0].name}}</span>
+            <div>New Snow: {{waxSelectionService.options[0].newSnow.min}}/{{waxSelectionService.options[0].newSnow.max}}</div>
+            <div>Old Snow: {{waxSelectionService.options[0].oldSnow.min}}/{{waxSelectionService.options[0].oldSnow.min}}</div>
+        </div>
+      </div>
     </ion-row>
   </ion-grid>
 </ion-content>
