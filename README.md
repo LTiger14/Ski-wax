@@ -9,8 +9,11 @@ Repository for the Ski wax app  ❄️ :rocket: - This is still a work in progre
 1. Clone repository
 2. Run `npm install`
 3. Generate an api key for [darksky API](https://darksky.net/dev) and one for [Goodgle map](https://developers.google.com/maps/documentation/javascript/get-api-key)
-4. In the project root create a file named `.env`
-5. In this file add the two following lines : 
-  - `WEATHER_API_KEY=(your Darksky API key)`
-  - `LOCATION_API_KEY=(your Google maps API key)`
-6. To test in your browser just run `ionic serve`
+4. In the `src` folder, create a folder called `environment`
+5. In this folder create a file called `environment.dev.ts`
+6. In this new file add the following code :
+`export const ENV = {
+    WEATHER_API_KEY: '{Your weather API key}',
+    LOCATION_API_KEY: '{Your location API key}'
+}`
+7. To test in your browser just run `ionic serve`
